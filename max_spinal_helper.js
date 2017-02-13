@@ -42,10 +42,33 @@ function deepSet(obj, path, value) {
     // return schema;
 }
 
+function deepDelete(obj, path) {
+    var schema = obj;  // a moving reference to internal objects within obj
+    var pList = path.split('.');
+    var len = pList.length;
+    for(var i = 0; i < len-1; i++) {
+        var elem = pList[i];
+        if( !schema[elem] ) schema[elem] = {}
+        schema = schema[elem];
+    }
+
+    // schema[pList[len-1]] = value;
+    delete schema[pList[len-1]];
+    // post(JSON.stringify(schema, null, 2) + '\n');
+    // post('deep set!! ' + JSON.stringify(schema, null, 2) + '\n');
+    // return schema;
+}
+
 function set(obj, path, value)
 {
 	var myObj = parsed[obj];
 	deepSet(myObj, path, value);
+}
+
+function del(obj, path)
+{
+	var myObj = parsed[obj];
+	deepDelete(myObj, path);
 }
 
 function stringify(obj)
