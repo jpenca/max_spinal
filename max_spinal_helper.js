@@ -39,15 +39,13 @@ function deepSet(obj, path, value) {
     schema[pList[len-1]] = value;
     // post(JSON.stringify(schema, null, 2) + '\n');
     // post('deep set!! ' + JSON.stringify(schema, null, 2) + '\n');
-    return schema;
+    // return schema;
 }
 
 function set(obj, path, value)
 {
-	// post('setting ' + obj + ' ' + path + ' to ' + value + '\n');
 	var myObj = parsed[obj];
-	parsed[obj] = deepSet(myObj, path, value);
-	get(obj, path);
+	deepSet(myObj, path, value);
 }
 
 function stringify(obj)
@@ -56,7 +54,7 @@ function stringify(obj)
 	outlet(2, JSON.stringify(myObj));
 }
 
-function post(obj, address)
+function xhrpost(obj, address)
 {
 	var myObj = parsed[obj];
 	var string = JSON.stringify(myObj);
@@ -74,4 +72,3 @@ function post(obj, address)
     xhr.send(string);
 
 }
-
